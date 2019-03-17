@@ -5,41 +5,34 @@ import 'package:flutter_app/util/netUtil.dart';
 import 'dart:convert';
 
 class Index extends StatefulWidget {
- // final items ;
+  // final items ;
   final String title;
- Index({Key key,  this.title="ha"}) : super(key: key);
-
-
-
-
+  Index({Key key, this.title = "ha"}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => new IndexState();
-
 }
 
-class IndexState  extends State<Index>{
+class IndexState extends State<Index> {
   List<Order> _items = [];
   Order select;
 
   @override
   void initState() {
     List<Order> items = [];
-    HttpController.get("http://127.0.0.1:10005/api/all", (data){
-
-      if(data!=null){
-        final  body =json.decode(data.toString()) ;
+    HttpController.get("http://127.0.0.1:10005/api/all", (data) {
+      if (data != null) {
+        final body = json.decode(data.toString());
 
         print(body);
-        body.forEach((f){
-          Order o = new Order(f["order_id"],f["creater_id"],f["describe"]);
+        body.forEach((f) {
+          Order o = new Order(f["order_id"], f["creater_id"], f["describe"]);
 
           //print(f);
           items.add(o);
-
         });
 
-        print("build"+items.length.toString());
+        print("build" + items.length.toString());
       }
 
       setState(() {
@@ -52,46 +45,29 @@ class IndexState  extends State<Index>{
   Widget build(BuildContext context) {
     // TODO: implement build
 
-    List<Widget> tiles = _items.map((order){
+    List<Widget> tiles = _items.map((order) {
       return new ListTile(
-        title: Text(order.order_id),
-        trailing: Icon(Icons.star_border)
-      );
+          title: Text(order.order_id), trailing: Icon(Icons.star_border));
     }).toList();
     tiles.add(new ListTile(
-      title: Text("新增工单",textAlign: TextAlign.center,style: TextStyle(
-fontSize: 24      ),),
+      title: Text(
+        "新增工单",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 24),
+      ),
+    ));
 
-    )
-
-    );
-
-    return  Column(
-      children: <Widget>[
-
-        Container(
-
-          height: 200,
-          child: ListView(
-            padding: EdgeInsets.all(20.0),
-            children: tiles,)
-
-
-        ),
-
-
-      ],
+    return ListView(
+              padding: EdgeInsets.all(20.0),
+              children: tiles,
 
     );
   }
 
-
- static  List<String>  _getItems(){
-    return List<String>.generate(10, (i)=>"list$i");
-   }
-
+  static List<String> _getItems() {
+    return List<String>.generate(10, (i) => "list$i");
+  }
 }
-
 
 /*
 ListView.builder(
