@@ -94,7 +94,7 @@ class Select {
 
  List<Select> selects = <Select>[
    new Select(inside: Index(),title: "首页",icon: Icon(Icons.home)),
-   new Select(inside: Index(),title: "新增",icon: Icon(Icons.add)),
+   new Select(inside: Index(),title: "新增",icon: Icon(Icons.add_box)),
 
    new Select(inside: Car(),title: "历史",icon: Icon(Icons.history)),
 //   new Select(inside: Index(),title: "公交车",icon: Icon(Icons.directions_bus)),
